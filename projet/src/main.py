@@ -1,6 +1,5 @@
-from rot13 import codage, decodage
+from rot13 import rot13_c, rot13_d
 
-string = "Bienvenu au codeur-decodeur"
+string = "On est le 22-01-22"
 
-print(decodage(codage(string)["message_code"].lower(), codage(string)["alphabet_base"])["message_decode"])
-
+print(rot13_d(rot13_c(string)["message_code"].lower())["message_decode"])
