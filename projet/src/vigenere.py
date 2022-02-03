@@ -33,7 +33,3 @@ def vigenere_c(message_clair, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         "message_clair": message_clair,
         "message_code": message_code
     }
-
-
-
-print(vigenere_c("Bonjour", "Une cle"))
