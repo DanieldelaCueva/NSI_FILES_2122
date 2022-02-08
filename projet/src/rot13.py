@@ -18,14 +18,14 @@ def rot13_c(message_clair):
         "message_code": resultats["message_code"]
     }
 
-def rot13_d(message):
+def rot13_d(message_code):
     """
     Retourne décodé un message préalablement codé selon la méthode ROT-13.
     Le message, ainsi que l'alphabet de base utilisé lors du codage, sont reçus en paramètre.
     """
 
     #rot13 est le code de césar avec un décalage de 13
-    resultats = cesar_d(message, 13)
+    resultats = cesar_d(message_code, 13)
 
     #retourne un dicionaire contenant les caractéristiques du décodage et son résultat pour les montrer sur l'interface
     return {
@@ -33,6 +33,6 @@ def rot13_d(message):
         "alphabet_base": resultats["alphabet_base"],
         "chiffres_base": resultats["chiffres_base"],
         "cle": None,
-        "message_introduit": message,
+        "message_code": message,
         "message_decode": resultats["message_decode"]
     }

@@ -1,6 +1,6 @@
 chiffres="0123456789"
 
-def polybe_c(message_clair, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
+def creer_grille(alphabet):
     # vérifie que l'alphabet introduit a bien une longeur de 25, arrete l'exécution sdu programme et affiche une erreur sinon
     if len(alphabet) != 25:
         raise ValueError("L'alphabet doit comporter 25 lettres")
@@ -10,6 +10,15 @@ def polybe_c(message_clair, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
     for i in range(1, 6):
         ligne = alphabet[5*(i-1) : (5*i)]
         grille.append(list(ligne))
+    return grille
+
+def polybe_c(message_clair, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
+
+    """
+        Code un message selon le chiffrement de Polybe
+    """
+
+    grille = creer_grille(alphabet)
 
     message_code = ""
 
@@ -36,4 +45,40 @@ def polybe_c(message_clair, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
         "cle": None,
         "message_clair": message_clair,
         "message_code": message_code
+    }
+
+def polybe_d(message_code, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
+
+    """
+        Décode un message selon le chiffrement de Polybe
+    """
+
+    grille = creer_grille(alphabet)
+    message_decode = ""
+
+    # la variable i sera incrémentée de 2 si sa position dans le message contient un chiffre 
+    # (message_code[i]-1 et message_code[i+1]-1 seront les indices sur la matrice d'une lettre)
+    # et sera incrémentée de 1 si le caractère trouvé est diférent (espace, ponctuation)
+    i = 0
+    
+    while i < len(message_code):
+        if message_code[i] in chiffres:
+            # ajoute au message décodé le cactère trouvé sur la grille en fonction de ses coordonnées (indiquées sur le message codé)
+            x = int(message_code[i])-1
+            y = int(message_code[i+1])-1
+            message_decode += str(grille[x][y])
+            i+=2
+        else:
+            message_decode += message_code[i]
+            i+=1
+    
+        
+    # retourne un dicionaire contenant les caractéristiques du codage et son résultat pour les montrer sur l'interface
+    return {
+        "methode": "Polybe",
+        "alphabet_base": alphabet,
+        "chiffres_base": chiffres,
+        "cle": None,
+        "message_code": message_code,
+        "message_decode": message_decode
     }

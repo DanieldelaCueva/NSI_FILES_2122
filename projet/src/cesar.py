@@ -34,7 +34,7 @@ def cesar_c(message_clair, decalage=3):
         "message_code": message_code
     }
 
-def cesar_d(message_clair, decalage=3):
+def cesar_d(message_code, decalage=3):
     """
     Retourne décodé un message préalablement codé selon la méthode de César.
     Le message, ainsi que l'alphabet et les chiffres de base utilisés lors du codage, sont reçus en paramètre.
@@ -42,7 +42,7 @@ def cesar_d(message_clair, decalage=3):
 
     message_decode = ""
 
-    for caractere in message_clair.upper():
+    for caractere in message_code.upper():
         if caractere in alphabet: # vérifie si le caractère est une lettre pour la décoder
             i = alphabet.index(caractere)
             i_decodage = i - decalage
@@ -71,6 +71,6 @@ def cesar_d(message_clair, decalage=3):
         "alphabet_base": alphabet,
         "chiffres_base": chiffres,
         "cle": decalage,
-        "message_clair": message_clair,
+        "message_code": message_code,
         "message_decode": message_decode
     }
