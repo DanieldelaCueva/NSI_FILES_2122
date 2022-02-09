@@ -53,7 +53,6 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         if caractere in alphabet:
             # différence des indices dans l'alphabet introduit du caractère et du caractère de la clé correspondant
             i = ( alphabet.index(caractere) - alphabet.index(cle.upper()[k]) )
-            print(i)
             if i < 0:
                 i += 26
             k += 1
@@ -73,7 +72,7 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         "message_decode": message_decode
     }
 
-test = "Message de test"
-cle_t = "test"
+# test = "Message de test"
+# cle_t = "test"
 
-print(vigenere_d(vigenere_c(test, cle_t)["message_code"], cle_t))
+# print(vigenere_d(vigenere_c(test, cle_t)["message_code"], cle_t))
