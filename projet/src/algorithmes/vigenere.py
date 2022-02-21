@@ -71,8 +71,3 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         "message_code": message_code,
         "message_decode": message_decode
     }
-
-# test = "Message de test"
-# cle_t = "test"
-
-# print(vigenere_d(vigenere_c(test, cle_t)["message_code"], cle_t))

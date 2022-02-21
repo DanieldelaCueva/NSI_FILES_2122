@@ -33,7 +33,7 @@ def polybe_c(message_clair, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
                     message_code += codage
         elif caractere in chiffres:
             # affiche une erreur si le caractère à coder est un chiffre
-            raise ValueError("Les chiffres ne peuvent pas être codés avec Polybe")
+            raise ValueError("Les chiffres ne peuvent pas être encodés avec Polybe")
         else:
             message_code += caractere
 

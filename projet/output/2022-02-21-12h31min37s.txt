@@ -1,0 +1,5 @@
+Date: 2022-02-21-12h31min37s
+Opération: Encodage
+Méthode: ROT13
+Message introduit: sgtaery
+Message résultant: FTGNREL
