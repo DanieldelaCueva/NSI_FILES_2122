@@ -20,7 +20,7 @@ class Interface:
         self._fenetre.title("Cryptage")
 
         # crée le message conteant les instructions
-        self._mesage_instructions = Label(self._fenetre, width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Choisissez la méthode, le mode et le jeu de caractères")
+        self._mesage_instructions = Label(self._fenetre, width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Choisissez la méthode, le mode et la clé de codage")
 
         # place le text à un endroit précis de la fenêtre avec la méthode grid()
         self._mesage_instructions.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
@@ -37,14 +37,14 @@ class Interface:
         # boucle créant les boutons indiqués dans le dictionnaire
         ligne = 1
         for (texte, valeur) in boutons.items():
-            Radiobutton(self._fenetre, text = texte, variable = self._selection_mode, value = valeur).grid(row = ligne, column=0, columnspan=4, padx=10, pady=10)
+            Radiobutton(self._fenetre, text = texte, variable = self._selection_mode, value = valeur, command=self.changer_selon_mode).grid(row = ligne, column=0, columnspan=4, padx=10, pady=10)
             ligne += 1
 
         # variable qui va contenir la méthode de codage selectionnée, ROT13 est la valeur par défaut
         self._selection_methode = StringVar(self._fenetre, "ROT13")
 
         methodes = ("ROT13", "CODE DE CÉSAR", "CODE DE VIGENÈRE", "CARRÉ DE POLYBE")
-        self._liste_de_methodes = OptionMenu(self._fenetre, self._selection_methode, *methodes)
+        self._liste_de_methodes = OptionMenu(self._fenetre, self._selection_methode, *methodes, command=self.changer_selon_methode)
         
         # affiche l'outil de sélection de la méthode de codage
         self._liste_de_methodes.grid(row = 3, column=0, columnspan=4, padx=10, pady=10)
@@ -60,11 +60,10 @@ class Interface:
         self._v_cle = StringVar(self._fenetre, "")
 
         # étiquette et champ de texte pour entrer la clé de codage
+        # elles ne sont pas montrées par défaut car la méthode par défaut, rot13, ne nécessite pas de clé de codage
         self._label_cle = Label(self._fenetre, width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Entrez la clé de codage:")
-        self._label_cle.grid(row = 8, column=0, columnspan=4, pady=5, sticky="W")
 
         self._entree_cle = Entry(self._fenetre, textvariable=self._v_cle)
-        self._entree_cle.grid(row = 8, column=1, columnspan=4, pady=5)
 
         # étiquette et champ de texte où le message encodé/décodé sera affiché
         self._label_sortie = Label(self._fenetre,width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Le résultat est:                                                                                ")
@@ -97,6 +96,8 @@ class Interface:
     def get_cle(self):
         return self._v_cle.get()
 
+
+    # méthodes de la classe
     def effacer_sortie(self):
         """
             fonction qui efface le champ de sortie
@@ -120,4 +121,28 @@ class Interface:
             Fonction qui affiche une alterte avec un message de texte donné
         """
         messagebox.showerror("Erreur", alerte)
+
+    def changer_selon_mode(self):
+        """
+            Fonction qui change l'interface en fonction de l'opération à réaliser
+        """
+        if self.get_mode() == "1":
+            self._mesage_instructions.config(text="Choisissez la méthode, le mode et la clé de codage")
+            self._label_cle.config(text="Entrez la clé de codage:")
+            self._bouton_coder.config(text="Coder")
+        elif self.get_mode() == "2":
+            self._mesage_instructions.config(text="Choisissez la méthode, le mode et la clé de décodage")
+            self._label_cle.config(text="Entrez la clé de décodage:")
+            self._bouton_coder.config(text="Décoder")
+
+    def changer_selon_methode(self, *args):
+        """
+            Fonction qui change l'interface en fonction de la méthode de codage utilisée
+        """
+        if self.get_methode() == "ROT13" or self.get_methode() == "CARRÉ DE POLYBE":
+            self._label_cle.grid_forget()
+            self._entree_cle.grid_forget()
+        elif self.get_methode() == "CODE DE CÉSAR" or self.get_methode() == "CODE DE VIGENÈRE":
+            self._label_cle.grid(row = 8, column=0, columnspan=4, pady=5, sticky="W")
+            self._entree_cle.grid(row = 8, column=1, columnspan=4, pady=5)
     
