@@ -53,6 +53,11 @@ def polybe_d(message_code, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
         Décode un message selon le chiffrement de Polybe
     """
 
+    for caractere in message_code.upper():
+        print(caractere)
+        if caractere in alphabet:
+            raise ValueError("Les lettres ne peuvent pas être décodées avec Polybe")
+
     grille = creer_grille(alphabet)
     message_decode = ""
 

@@ -2,7 +2,8 @@
 from tkinter import (CENTER, RIGHT, Button, Label, OptionMenu,
                      Radiobutton, StringVar, Text, Entry, messagebox)
 
-# from ..algorithmes.rot13 import *
+import os
+from pathlib import Path
 
 class Interface:
     """
@@ -17,7 +18,8 @@ class Interface:
 
         # initialisation de la fenêtre
         self._fenetre = fenetre
-        self._fenetre.title("Cryptage")
+        self._fenetre.title("Encodeur - Décodeur")
+        self._fenetre.iconbitmap(f'{Path(os.getcwd()).parent.absolute()}\cryptage\icone.ico') # l'icone se trouve dans le même directoire 'cryptage' que le fichier exécutable
 
         # crée le message conteant les instructions
         self._mesage_instructions = Label(self._fenetre, width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Choisissez la méthode, le mode et la clé de codage")
@@ -142,7 +144,12 @@ class Interface:
         if self.get_methode() == "ROT13" or self.get_methode() == "CARRÉ DE POLYBE":
             self._label_cle.grid_forget()
             self._entree_cle.grid_forget()
-        elif self.get_methode() == "CODE DE CÉSAR" or self.get_methode() == "CODE DE VIGENÈRE":
+        elif self.get_methode() == "CODE DE CÉSAR":
+            self._label_cle.config(text="Entrez le décalage:")
+            self._label_cle.grid(row = 8, column=0, columnspan=4, pady=5, sticky="W")
+            self._entree_cle.grid(row = 8, column=1, columnspan=4, pady=5)
+        elif self.get_methode() == "CODE DE VIGENÈRE":
+            self._label_cle.config(text="Entrez la clé de codage:")
             self._label_cle.grid(row = 8, column=0, columnspan=4, pady=5, sticky="W")
             self._entree_cle.grid(row = 8, column=1, columnspan=4, pady=5)
     

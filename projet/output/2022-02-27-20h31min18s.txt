@@ -1,5 +1,0 @@
-Date: 2022-02-27-20h31min18s
-Opération: Décodage
-Méthode: CARRÉ DE POLYBE
-Message introduit: 23353211
-Message résultant: HOLA

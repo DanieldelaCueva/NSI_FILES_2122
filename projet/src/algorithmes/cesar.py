@@ -7,6 +7,12 @@ def cesar_c(message_clair, decalage=3):
     Retourne un message reçu en paramètre codé selon la méthode du code de César.
     """
 
+    # convertit decalage en entier et si ce n'est pas possible car il s'agit d'un caractere, affiche une erreur
+    try:
+        decalage = int(decalage)
+    except ValueError:
+        raise ValueError("La clé avec César doit être un décalage numérique")
+
     message_code = ""
 
     for caractere in message_clair.upper():
@@ -39,6 +45,12 @@ def cesar_d(message_code, decalage=3):
     Retourne décodé un message préalablement codé selon la méthode de César.
     Le message, ainsi que l'alphabet et les chiffres de base utilisés lors du codage, sont reçus en paramètre.
     """
+
+    # convertit decalage en entier et si ce n'est pas possible car il s'agit d'un caractere, affiche une erreur
+    try:
+        decalage = int(decalage)
+    except ValueError:
+        raise ValueError("La clé avec César doit être un décalage numérique")
 
     message_decode = ""
 

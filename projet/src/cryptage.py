@@ -1,6 +1,7 @@
 # importation du module externe Tkinter qui nous aide à contruire une interface graphique
 import datetime, os
 from tkinter import Tk
+from pathlib import Path
 
 # importation de la classe Interface définié dans le module interface du paquet interface
 from interface.interface import Interface
@@ -28,7 +29,7 @@ def codage():
                 interface.afficher_sortie(message_code)
 
             elif interface.get_methode() == "CODE DE CÉSAR":
-                message_code = cesar_c(message, int(cle))['message_code']
+                message_code = cesar_c(message, cle)['message_code']
                 interface.afficher_sortie(message_code)
 
             elif interface.get_methode() == "CODE DE VIGENÈRE":
@@ -47,7 +48,7 @@ def codage():
                 interface.afficher_sortie(message_decode)
 
             elif interface.get_methode() == "CODE DE CÉSAR":
-                message_decode = cesar_d(message, int(cle))['message_decode']
+                message_decode = cesar_d(message, cle)['message_decode']
                 interface.afficher_sortie(message_decode)
 
             elif interface.get_methode() == "CODE DE VIGENÈRE":
@@ -64,11 +65,14 @@ def codage():
 def sauvegarder():
 
     """
-        Fonction qui crée un fichier texte avec les données de l'opération
+        Fonction qui crée un fichier texte avec les métadonnées de l'opération
     """
 
     date = datetime.datetime.now().strftime('%Y-%m-%d-%Hh%Mmin%Ss')
-    adresse_fichier = os.getcwd() +  "\projet\output\\" + date + ".txt"
+
+    adresse_actuelle = Path(os.getcwd())
+
+    adresse_fichier = Path(f'{adresse_actuelle.parent.absolute()}/output/{date}.txt')
     
     with open(adresse_fichier, 'x', encoding='utf8') as f:
         f.write('Date: ' + date)
@@ -82,8 +86,11 @@ def sauvegarder():
 
         f.write("Méthode: " + interface.get_methode())
         f.write("\n")
-        if interface.get_methode() == "CODE DE VIGENÈRE" or interface.get_methode() == "CODE DE CÉSAR":
+        if interface.get_methode() == "CODE DE VIGENÈRE":
             f.write('Clé: ' + interface.get_cle())
+            f.write("\n")
+        if interface.get_methode() == "CODE DE CÉSAR":
+            f.write('Décalage: ' + interface.get_cle())
             f.write("\n")
         f.write('Message introduit: ' + interface.get_entree())
         f.write("\n")

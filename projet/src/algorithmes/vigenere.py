@@ -3,6 +3,11 @@ def vigenere_c(message_clair, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         Code un message selon le chiffrement de Vigenère
     """
 
+    # vérifie que la clé ne contient que des lettres
+    for caractere in cle_orig.upper():
+        if not caractere in alphabet:
+            raise ValueError("La clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
+
     message_code = ""
 
     cle = cle_orig.replace(" ", "") # supprime les espaces dans la clé
@@ -38,6 +43,11 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     """
         Décode un message selon le chiffrement de Vigenère
     """
+
+    # vérifie que la clé ne contient que des lettres
+    for caractere in cle_orig.upper():
+        if not caractere in alphabet:
+            raise ValueError("La clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
 
     message_decode = ""
 
