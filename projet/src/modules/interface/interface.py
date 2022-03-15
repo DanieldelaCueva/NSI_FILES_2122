@@ -7,44 +7,51 @@ from pathlib import Path
 
 class Interface:
     """
-        Classe qui définit les paramètres et la fonctionnalité de l'interface
+        Classe qui définit l'aspect et la fonctionnalité de l'interface. Elle prend un objet de type Tk en argument, ainsi qu'une fonction de codage/décodage et une fonction pour savegarder les métadonnées dans un fichier texte.
+        Certains attributs de la classe commençent par "_". Ils sont supposés être privés et ne doivent pas être accédés en dehors de la classe, or le concept de règles de visibilité n'existe pas en Python. 
     """
+
+    def __str__(self):
+        return "Interface basée sur un objet Tk"
     
     def __init__(self, fenetre, codage, sauvegarder):
 
         """
-            Contructeur de la classe, exécuté lorsque une instance est crée. Initialise les composants de l'interface
+            Contructeur de la classe, exécuté lorsque une instance est crée. Initialise les composants de l'interface.
         """
 
         # initialisation de la fenêtre
         self._fenetre = fenetre
         self._fenetre.title("Encodeur - Décodeur")
-        self._fenetre.iconbitmap(f'{Path(os.getcwd()).parent.absolute()}\cryptage\icone.ico') # l'icone se trouve dans le même directoire 'cryptage' que le fichier exécutable
+        self._fenetre.iconbitmap(f'{Path(os.getcwd()).parent.absolute()}\cryptage\icone.ico') # l'icone, lors de d'installation, se trouve dans le même directoire 'cryptage' que le fichier exécutable
 
-        # crée le message conteant les instructions
+        ## COMPOSANTS DE L'INTERFACE
+
+        # crée une étiquette conteant les instructions
         self._mesage_instructions = Label(self._fenetre, width=50, height=2, font=("Helvetica", 12), background="#f0f0ed", text="Choisissez la méthode, le mode et la clé de codage")
 
-        # place le text à un endroit précis de la fenêtre avec la méthode grid()
+        # place le texte à un endroit précis de la fenêtre avec la méthode grid()
         self._mesage_instructions.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
         # variable qui va contenir le mode de codage selectionnée, 1 (Encoder) est la valeur par défaut
         self._selection_mode = StringVar(self._fenetre, "1")
 
-        # dicionaire comprenant le texte et le numéro des boutons à générer
-        boutons = {
+        # dicionaire contenant le texte et le numéro des boutons à générer pour les différents modes disponibles
+        modes = {
             "Encoder": "1",
             "Décoder": "2"
         }
 
         # boucle créant les boutons indiqués dans le dictionnaire
         ligne = 1
-        for (texte, valeur) in boutons.items():
+        for (texte, valeur) in modes.items():
             Radiobutton(self._fenetre, text = texte, variable = self._selection_mode, value = valeur, command=self.changer_selon_mode).grid(row = ligne, column=0, columnspan=4, padx=10, pady=10)
             ligne += 1
 
         # variable qui va contenir la méthode de codage selectionnée, ROT13 est la valeur par défaut
         self._selection_methode = StringVar(self._fenetre, "ROT13")
 
+        # tuple contenant les différentes méthodes disponibles et liste affichée, de type OptionMenu
         methodes = ("ROT13", "CODE DE CÉSAR", "CODE DE VIGENÈRE", "CARRÉ DE POLYBE")
         self._liste_de_methodes = OptionMenu(self._fenetre, self._selection_methode, *methodes, command=self.changer_selon_methode)
         
@@ -84,25 +91,40 @@ class Interface:
 
     # getters pour le message entré, la sortie, le mode, la méthode, et la clé
     def get_entree(self):
+        """
+            Retourne le message entré
+        """
         return self._champ_entree.get("1.0", "end-1c")
 
     def get_sortie(self):
+        """
+            Retourne le message à la sortie
+        """
         return self._champ_sortie.get("1.0", "end-1c")
 
     def get_mode(self):
+        """
+            Retourne le mode de codage
+        """
         return self._selection_mode.get()
     
     def get_methode(self):
+        """
+            Retourne la méthode codage
+        """
         return self._selection_methode.get()
 
     def get_cle(self):
+        """
+            Retourne la clé de codage
+        """
         return self._v_cle.get()
 
 
     # méthodes de la classe
     def effacer_sortie(self):
         """
-            fonction qui efface le champ de sortie
+            Fonction qui efface le champ de sortie
         """
         self._champ_sortie.configure(state="normal")
         self._champ_sortie.delete("1.0", "end-1c")
@@ -120,13 +142,13 @@ class Interface:
  
     def afficher_alerte(self, alerte):
         """
-            Fonction qui affiche une alterte avec un message de texte donné
+            Fonction qui affiche une alerte avec un message de texte donné
         """
         messagebox.showerror("Erreur", alerte)
 
     def changer_selon_mode(self):
         """
-            Fonction qui change l'interface en fonction de l'opération à réaliser
+            Fonction qui change l'interface en fonction du mode de codage sélectionné
         """
         if self.get_mode() == "1":
             self._mesage_instructions.config(text="Choisissez la méthode, le mode et la clé de codage")
@@ -139,7 +161,7 @@ class Interface:
 
     def changer_selon_methode(self, *args):
         """
-            Fonction qui change l'interface en fonction de la méthode de codage utilisée
+            Fonction qui change l'interface en fonction de la méthode de codage sélectionnée
         """
         if self.get_methode() == "ROT13" or self.get_methode() == "CARRÉ DE POLYBE":
             self._label_cle.grid_forget()

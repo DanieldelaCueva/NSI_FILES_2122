@@ -4,12 +4,12 @@ from tkinter import Tk
 from pathlib import Path
 
 # importation de la classe Interface définié dans le module interface du paquet interface
-from interface.interface import Interface
+from modules.interface.interface import Interface
 
-from algorithmes.rot13 import *
-from algorithmes.cesar import *
-from algorithmes.vigenere import *
-from algorithmes.polybe import *
+from modules.algorithmes.rot13 import *
+from modules.algorithmes.cesar import *
+from modules.algorithmes.vigenere import *
+from modules.algorithmes.polybe import *
  
 def codage():
 
@@ -72,8 +72,9 @@ def sauvegarder():
 
     adresse_actuelle = Path(os.getcwd())
 
-    adresse_fichier = Path(f'{adresse_actuelle.parent.absolute()}/output/{date}.txt')
+    adresse_fichier = Path(f'{adresse_actuelle.parent.absolute()}/output/{date}.txt') # le fichier .txt avec les métadonnées sera enregisté dans le directoire "output", avec la date d'enregistrement comme nom de fichier
     
+    # crée un fichier texte, y écrit les différentes métadonnées et données du codage, enfonction de la méthode également
     with open(adresse_fichier, 'x', encoding='utf8') as f:
         f.write('Date: ' + date)
         f.write("\n")
@@ -97,10 +98,10 @@ def sauvegarder():
         f.write('Message résultant: ' + interface.get_sortie())
 
 
-# création d'un objet tk et de l'interface (objet), il sera impossible de changer les dimensions de l'interface
+# création d'un objet Tk et de l'interface (objet), il sera impossible de changer les dimensions de l'interface
 fenetre_principale = Tk()
 fenetre_principale.resizable(False, False)
 interface = Interface(fenetre_principale, codage, sauvegarder)
 
-# le script entre dans une boucle infine en attendant que des évènement se produisent
+# le script entre dans une boucle infine en attendant qu'un évènement se produise
 fenetre_principale.mainloop()

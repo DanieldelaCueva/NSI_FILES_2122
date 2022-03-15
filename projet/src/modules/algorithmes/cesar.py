@@ -22,7 +22,7 @@ def cesar_c(message_clair, decalage=3):
             
             message_code += alphabet[i_codage]
 
-        elif caractere in chiffres:
+        elif caractere in chiffres: # vérifie si le caractère est un chiffre pour le coder, ou le laisser inchangé si ce ne l'est pas
             i = chiffres.index(caractere)
             i_codage = (i+decalage)%10 # codage d'un chiffre avec le décalage indiqué
             
@@ -42,8 +42,7 @@ def cesar_c(message_clair, decalage=3):
 
 def cesar_d(message_code, decalage=3):
     """
-    Retourne décodé un message préalablement codé selon la méthode de César.
-    Le message, ainsi que l'alphabet et les chiffres de base utilisés lors du codage, sont reçus en paramètre.
+    Retourne décodé un message préalablement codé selon la méthode de César. Le message est reçu en paramètre.
     """
 
     # convertit decalage en entier et si ce n'est pas possible car il s'agit d'un caractere, affiche une erreur

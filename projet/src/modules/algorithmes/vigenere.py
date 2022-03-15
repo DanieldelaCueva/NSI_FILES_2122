@@ -6,7 +6,7 @@ def vigenere_c(message_clair, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     # vérifie que la clé ne contient que des lettres
     for caractere in cle_orig.upper():
         if not caractere in alphabet:
-            raise ValueError("La clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
+            raise ValueError("Un caractère de la clé n'appartient pas à l'alphabet. Rappel: la clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
 
     message_code = ""
 
@@ -16,12 +16,12 @@ def vigenere_c(message_clair, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     while len(cle) < len(message_clair):
         cle += cle
 
-    k = 0
+    k = 0 # ariable qui va contenir l'indice du caractère travaillé de la clé
 
     for caractere in message_clair.upper():
         if caractere in alphabet:
-            # somme des indices dans l'alphabet introduit du caractère et du caractère de la clé correspondant
-            i = ( alphabet.index(caractere) + alphabet.index(cle.upper()[k]) ) % 26
+            # somme des indices du caractère obtenu dans l'alphabet et du caractère de la clé correspondant, modulo len(alphabet) pour obtenir son indice dans l'alphabet
+            i = ( alphabet.index(caractere) + alphabet.index(cle.upper()[k]) ) % len(alphabet)
             k += 1
 
             message_code += alphabet[i]
@@ -47,7 +47,7 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     # vérifie que la clé ne contient que des lettres
     for caractere in cle_orig.upper():
         if not caractere in alphabet:
-            raise ValueError("La clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
+            raise ValueError("Un caractère de la clé n'appartient pas à l'alphabet. Rappel: la clé ne peut contenir que des lettres non accentuées avec Vigenère. Exceptions: ñ - non admise")
 
     message_decode = ""
 
@@ -61,10 +61,11 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 
     for caractere in message_code.upper():
         if caractere in alphabet:
-            # différence des indices dans l'alphabet introduit du caractère et du caractère de la clé correspondant
+            # différence des indices du caractère obtenu dans l'alphabet et du caractère de la clé correspondant
             i = ( alphabet.index(caractere) - alphabet.index(cle.upper()[k]) )
+            # vérification: l'indice obtenu correspond à une position dans l'alphabet de len(alphabet) lettres
             if i < 0:
-                i += 26
+                i += len(alphabet)
             k += 1
 
             message_decode += alphabet[i]
@@ -81,3 +82,5 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         "message_code": message_code,
         "message_decode": message_decode
     }
+
+print(vigenere_d("bdgfea", "cle", "ABCDEFGHIJ"))
