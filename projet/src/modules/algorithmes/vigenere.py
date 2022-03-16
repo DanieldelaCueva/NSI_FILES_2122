@@ -83,4 +83,6 @@ def vigenere_d(message_code, cle_orig, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         "message_decode": message_decode
     }
 
-print(vigenere_d("bdgfea", "cle", "ABCDEFGHIJ"))
+# si le module n'est pas importé, mais exécuté
+if __name__ == "__main__":
+    print("Vous avez éxécuté le module Vigenère, qui contient les fonctions d'encodage et de décodage selon le code de vignère")

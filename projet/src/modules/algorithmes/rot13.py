@@ -36,3 +36,7 @@ def rot13_d(message_code):
         "message_code": message_code,
         "message_decode": resultats["message_decode"]
     }
+
+# si le module n'est pas importé, mais exécuté
+if __name__ == "__main__":
+    print("Vous avez éxécuté le module ROT13, qui contient les fonctions d'encodage et de décodage selon le la méthode rot13")

@@ -87,3 +87,7 @@ def polybe_d(message_code, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXY"):
         "message_code": message_code,
         "message_decode": message_decode
     }
+
+# si le module n'est pas importé, mais exécuté
+if __name__ == "__main__":
+    print("Vous avez éxécuté le module Polybe, qui contient les fonctions d'encodage et de décodage selon le carré de polybe")

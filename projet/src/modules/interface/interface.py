@@ -175,3 +175,6 @@ class Interface:
             self._label_cle.grid(row = 8, column=0, columnspan=4, pady=5, sticky="W")
             self._entree_cle.grid(row = 8, column=1, columnspan=4, pady=5)
     
+# si le module n'est pas importé, mais exécuté
+if __name__ == "__main__":
+    print("Vous avez éxécuté le module Interface, qui contient la classe Interface")
