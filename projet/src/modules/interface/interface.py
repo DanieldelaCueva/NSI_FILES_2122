@@ -22,8 +22,8 @@ class Interface:
 
         # initialisation de la fenêtre
         self._fenetre = fenetre
-        self._fenetre.title("Encodeur - Décodeur")
-        self._fenetre.iconbitmap(f'{Path(os.getcwd()).parent.absolute()}\cryptage\icone.ico') # l'icone, lors de d'installation, se trouve dans le même directoire 'cryptage' que le fichier exécutable
+        self._fenetre.title("Encodeur - Décodeur") 
+        self._fenetre.iconbitmap(f'{Path(__file__).parent.parent.parent}\icone.ico') # l'icone, lors de d'installation, se trouve dans le même directoire 'cryptage' que le fichier exécutable
 
         ## COMPOSANTS DE L'INTERFACE
 
@@ -87,8 +87,10 @@ class Interface:
 
         # bouton qui, actionné, sauvegardera le message introduit et le résultat de son encodage/décodage
         self._bouton_sauvegarder = Button(self._fenetre, justify=RIGHT, text = "Sauvegarder", command=sauvegarder)
-        self._bouton_sauvegarder.grid(row = 13, column=3, columnspan=4, pady=10)
+        self._bouton_sauvegarder.grid(row = 13, column=3, columnspan=4, pady=10)     
 
+
+    
     # getters pour le message entré, la sortie, le mode, la méthode, et la clé
     def get_entree(self):
         """

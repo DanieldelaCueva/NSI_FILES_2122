@@ -69,11 +69,9 @@ def sauvegarder():
     """
 
     date = datetime.datetime.now().strftime('%Y-%m-%d-%Hh%Mmin%Ss')
-
-    adresse_actuelle = Path(os.getcwd())
-
-    adresse_fichier = Path(f'{adresse_actuelle.parent.absolute()}/output/{date}.txt') # le fichier .txt avec les métadonnées sera enregisté dans le directoire "output", avec la date d'enregistrement comme nom de fichier
     
+    adresse_fichier = f"{Path(__file__).parent}/output/{date}.txt" # le fichier .txt avec les métadonnées sera enregisté dans le directoire "output", avec la date d'enregistrement comme nom de fichier
+
     # crée un fichier texte, y écrit les différentes métadonnées et données du codage, enfonction de la méthode également
     with open(adresse_fichier, 'x', encoding='utf8') as f:
         f.write('Date: ' + date)

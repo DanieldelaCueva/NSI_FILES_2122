@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Palindrome</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h3>RECHERCHE DE PALINDROME</h3>
+    <input id="motSaisi" onkeypress="verifPalindrome()">
+    <span id="reponse"></span>
+    <script>
+        function verifPalindrome() {
+            texte = document.getElementById("motSaisi").value;
+            if ( texte === reverseString(texte)) {
+                document.getElementById("reponse").innerHTML = "C'est un palyndrôme";
+            } else {
+                document.getElementById("reponse").innerHTML = "Ce n'est un palyndrôme";
+            }
+        }
+    </script>
+  </body>
+</html>
