@@ -1,0 +1,30 @@
+Le code est documenté en soi. Pour plus de précisions, voir diaporama de fonctionnement du code.
+
+Biblothèques tierces utilisées pour le fonctionnement du code:
+	- Tkinter
+
+Biblothèques tierces utilisées pour la phase de développement:
+	- PyInstaller
+
+Pour plus de précisions, le fichier requirements.txt produit par pip contient les bibliothèques:
+altgraph==0.17.2
+asgiref==3.4.1
+astroid==2.4.2
+colorama==0.4.4
+future==0.18.2
+isort==5.6.4
+lazy-object-proxy==1.4.3
+mccabe==0.6.1
+pefile==2021.9.3
+pyinstaller==4.10
+pyinstaller-hooks-contrib==2022.2
+pylint==2.6.0
+pytz==2021.1
+pywin32-ctypes==0.2.0
+six==1.15.0
+sqlparse==0.4.1
+tk==0.1.0
+toml==0.10.2
+wrapt==1.12.1
+
+Notez que la plupart d'entre elles ont été installées pour d'autres projets, en dehors d'environements virtuels.
